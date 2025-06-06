@@ -33,18 +33,14 @@ export function ExpandableTabs({
 }) {
   const [selected, setSelected] = React.useState(0);
   const [hovered, setHovered] = React.useState(null);
-  const hasInteracted = React.useRef(false);
-  const outsideClickRef = React.useRef(null);
 
   const handleSelect = (index) => {
-    hasInteracted.current = true;
     setSelected(index);
     onChange?.(index);
   };
 
   React.useEffect(() => {
     if (dialogOpen === false) {
-      hasInteracted.current = false;
       setSelected(null);
     }
   }, [dialogOpen]);
@@ -55,7 +51,6 @@ export function ExpandableTabs({
 
   return (
     <div
-      ref={outsideClickRef}
       className={cn(
         "flex flex-wrap items-center gap-2 rounded-full border bg-background px-1 py-1",
         className

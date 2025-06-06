@@ -52,7 +52,7 @@ export function ExpandableTabs({
   return (
     <div
       className={cn(
-        "flex flex-wrap items-center gap-2 rounded-full border bg-background px-1 py-1",
+        "flex flex-wrap items-center gap-1 rounded-full border bg-background px-1 py-1",
         className
       )}>
       {tabs.map((tab, index) => {
@@ -73,7 +73,7 @@ export function ExpandableTabs({
             onClick={() => handleSelect(index)}
             transition={transition}
             className={cn(
-              "relative flex items-center rounded-full px-4 py-2 text-sm font-medium transition-colors duration-300",
+              "relative flex items-center rounded-full px-4 py-2 text-xs font-medium transition-colors duration-300 cursor-pointer",
               isActive
                 ? cn("bg-muted", activeColor)
                 : "text-muted-foreground hover:bg-muted hover:text-foreground"

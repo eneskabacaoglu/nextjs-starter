@@ -79,3 +79,15 @@ Next.js provides flexible caching at the fetch, function, and route level. You c
 - By default, fetch requests in Next.js are not cached (`cache: 'no-store'`).
 - You only need to specify `cache: 'no-store'` if you want to be explicit, or if a parent/layout sets a different cache policy (like `fetchCache = 'default-cache'`).
 - In those cases, specifying `cache: 'no-store'` ensures that particular fetch is always dynamic and never cached, regardless of the global or parent setting.
+
+### Q: How can I go back to a previous version of my project with your help?
+
+**A:**
+- Tell me you want to revert, reset, or checkout a previous commit. You can specify by commit hash, message, or date.
+- I'll help you list your commit history so you can pick the right version.
+- I can:
+  - Reset the project to a specific commit (removes later commits)
+  - Revert a commit (creates a new commit that undoes changes)
+  - Checkout a previous commit (for temporary exploration)
+- I'll run the git commands and push if you want the change on GitHub.
+- Example: "Undo the last commit", "Go back to commit abc123", or "Revert to the state on June 1st".

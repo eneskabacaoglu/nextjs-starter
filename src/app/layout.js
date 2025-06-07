@@ -14,6 +14,7 @@ export default function RootLayout({ children }) {
       <head>
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
       </head>
+
       <body>
         <div style={{ position: 'fixed', top: 24, right: 24, zIndex: 100 }}>
           <ThemeToggle />

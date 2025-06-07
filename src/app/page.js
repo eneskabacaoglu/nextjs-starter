@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { ExpandableTabs } from "@/components/ui/expandable-tabs";
-import { Home as HomeIcon, User, Settings } from "lucide-react";
+import { Layers, Grid2x2Plus, User, Settings } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -13,13 +13,15 @@ import {
 } from "@/components/ui/dialog";
 import React from "react";
 
+
 export default function HomePage() {
   function handleClick() {
     alert('welcome');
   }
 
   const tabAlerts = [
-    "home page",
+    "Your blends",
+    "Blocks to add",
     "profile page",
     "settings page"
   ];
@@ -27,22 +29,24 @@ export default function HomePage() {
   const [dialogOpen, setDialogOpen] = React.useState(false);
   const [dialogMessage, setDialogMessage] = React.useState("");
 
-  const tabIndexToAlertIndex = (index) => [0, 1, null, 2][index] ?? null;
+  const tabIndexToAlertIndex = (index) => [0, 1, null, 2, 3][index] ?? null;
 
   return (
     <main style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', minHeight: '80vh', position: 'relative' }}>
+
       <h1 style={{ textAlign: 'center', fontSize: '2rem' }}>
         Welcome to <b>Blend</b>
       </h1>
       <Button onClick={handleClick} style={{ marginTop: '2rem', fontSize: '1rem', cursor: 'pointer' }}>
         Hello
       </Button>
-      <div style={{ position: 'absolute', bottom: 32, left: 0, right: 0, display: 'flex', justifyContent: 'center' }}>
+      <div style={{ position: 'fixed', bottom: 80, left: 0, right: 0, display: 'flex', justifyContent: 'center' }}>
         <ExpandableTabs
           tabs={[
-            { title: 'Home', icon: HomeIcon },
-            { title: 'Profile', icon: User },
+            { title: 'Blends', icon: Layers },
+            { title: 'Blocks', icon: Grid2x2Plus },
             { type: 'separator' },
+            { title: 'Profile', icon: User },
             { title: 'Settings', icon: Settings }
           ]}
           onChange={(index) => {

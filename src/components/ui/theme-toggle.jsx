@@ -1,90 +1,46 @@
 "use client";
-import { useState, useEffect } from "react"
-import { Moon, Sun } from "lucide-react"
-import { cn } from "@/lib/utils"
 
-export function ThemeToggle({
-  className
-}) {
-  const [isDark, setIsDark] = useState(true);
-  const [mounted, setMounted] = useState(false);
+import { Moon, Sun } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { useTheme } from "@/components/theme-provider";
 
-  useEffect(() => {
-    setMounted(true);
-    if (!document.documentElement.classList.contains("dark")) {
-      document.documentElement.classList.add("dark");
-      setIsDark(true);
-    } else {
-      setIsDark(true);
-    }
-  }, []);
+export function ThemeToggle({ className }) {
+  const { theme, setTheme } = useTheme();
+  const isDark = theme === "dark";
 
-  useEffect(() => {
-    if (!mounted) return;
-    if (isDark) {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
-  }, [isDark, mounted]);
-
-  if (!mounted) {
-    // Optionally, render nothing or a skeleton until mounted
-    return null;
-  }
-
-  // next-themes
-  // const { resolvedTheme, setTheme } = useTheme()
-  // const isDark = resolvedTheme === "dark"
-  // onClick={() => setTheme(isDark ? "light" : "dark")}
+  const toggleTheme = () => {
+    setTheme(isDark ? "light" : "dark");
+  };
 
   return (
-    <div
+    <button
+      type="button"
       className={cn(
-        "flex w-16 h-8 p-1 rounded-full cursor-pointer transition-all duration-300",
+        "relative w-14 h-8 rounded-full cursor-pointer transition-colors duration-300 overflow-hidden",
         isDark 
-          ? "bg-zinc-950 border border-zinc-800" 
-          : "bg-white border border-zinc-200",
+          ? "bg-zinc-800 border border-zinc-700" 
+          : "bg-gray-200 border border-gray-300",
         className
       )}
-      onClick={() => setIsDark(!isDark)}
-      role="button"
-      tabIndex={0}
+      onClick={toggleTheme}
       aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
-      onKeyDown={e => {
-        if (e.key === "Enter" || e.key === " ") {
-          setIsDark(d => !d);
-        }
-      }}
     >
-      <div className="flex justify-between items-center w-full">
-        <div
+      <div className="relative w-full h-full flex items-center">
+        <div 
           className={cn(
-            "flex justify-center items-center w-6 h-6 rounded-full transition-transform duration-300",
+            "absolute w-6 h-6 rounded-full flex items-center justify-center transition-transform duration-300 transform",
             isDark 
-              ? "transform translate-x-0 bg-zinc-800" 
-              : "transform translate-x-8 bg-gray-200"
-          )}>
+              ? "translate-x-1 bg-zinc-700" 
+              : "translate-x-7 bg-white"
+          )}
+        >
           {isDark ? (
             <Moon className="w-4 h-4 text-white" strokeWidth={1.5} />
           ) : (
-            <Sun className="w-4 h-4 text-gray-700" strokeWidth={1.5} />
-          )}
-        </div>
-        <div
-          className={cn(
-            "flex justify-center items-center w-6 h-6 rounded-full transition-transform duration-300",
-            isDark 
-              ? "bg-transparent" 
-              : "transform -translate-x-8"
-          )}>
-          {isDark ? (
-            <Sun className="w-4 h-4 text-gray-500" strokeWidth={1.5} />
-          ) : (
-            <Moon className="w-4 h-4 text-black" strokeWidth={1.5} />
+            <Sun className="w-4 h-4 text-yellow-500" strokeWidth={1.5} />
           )}
         </div>
       </div>
-    </div>
+    </button>
   );
 }

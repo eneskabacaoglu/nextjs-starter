@@ -1,4 +1,5 @@
 import "./globals.css";
+import { ThemeWrapper } from "./theme-wrapper";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 
 export const metadata = {
@@ -8,15 +9,17 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
       </head>
       <body>
-        <div style={{ position: 'fixed', top: 24, right: 24, zIndex: 100 }}>
-          <ThemeToggle />
-        </div>
-        {children}
+        <ThemeWrapper>
+          <div style={{ position: 'fixed', top: 24, right: 24, zIndex: 100 }}>
+            <ThemeToggle />
+          </div>
+          {children}
+        </ThemeWrapper>
       </body>
     </html>
   );

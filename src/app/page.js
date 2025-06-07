@@ -3,7 +3,7 @@
 import { AuthGuard } from "@/components/AuthGuard";
 import { Button } from "@/components/ui/button";
 import { ExpandableTabs } from "@/components/ui/expandable-tabs";
-import { Layers, Grid2x2Plus, User, Bolt } from "lucide-react";
+import { Layers, Grid2x2Plus, User, Bolt, Power } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -31,7 +31,9 @@ export default function HomePage() {
   const [dialogOpen, setDialogOpen] = React.useState(false);
   const [dialogMessage, setDialogMessage] = React.useState("");
 
-  const tabIndexToAlertIndex = (index) => [0, 1, null, 2, 3][index] ?? null;
+  const tabIndexToAlertIndex = (index) => {
+    return [0, 1, null, 2, 3, null, 4][index] ?? null;
+  };
 
   return (
     <AuthGuard>
@@ -49,9 +51,17 @@ export default function HomePage() {
               { title: 'Blocks', icon: Grid2x2Plus },
               { type: 'separator' },
               { title: 'Profile', icon: User },
-              { title: 'Settings', icon: Bolt }
+              { title: 'Settings', icon: Bolt },
+              { type: 'separator' },
+              { title: 'Logout', icon: Power}
             ]}
             onChange={(index) => {
+              if (index === 6) {
+                handleLogout();
+                return;
+              }
+              
+              // Handle other tab clicks
               const alertIndex = tabIndexToAlertIndex(index);
               if (alertIndex !== null && tabAlerts[alertIndex]) {
                 setDialogMessage(tabAlerts[alertIndex]);
